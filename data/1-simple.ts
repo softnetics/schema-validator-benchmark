@@ -1,11 +1,11 @@
-export type SubModel = {
+type Simple_SubModel = {
   a: Date
   b: string
 }
 
-export type Model = {
+type Simple_Model = {
   a: number
   b: string
   c: boolean
-  d: SubModel[]
+  d: Simple_SubModel[]
 }

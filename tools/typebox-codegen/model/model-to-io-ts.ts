@@ -163,7 +163,7 @@ export namespace ModelToIoTs {
     }
     return Type(schema, buffer.join(``))
   }
-  function Promise(schema: Types.TPromise) {
+  function _Promise(schema: Types.TPromise) {
     support_types.set(
       'Promise',
       `const t_Promise = new t.Type<Promise<any>, Promise<any>, unknown>(
@@ -247,7 +247,7 @@ export namespace ModelToIoTs {
     if (Types.TypeGuard.IsNull(schema)) return Null(schema)
     if (Types.TypeGuard.IsNumber(schema)) return Number(schema)
     if (Types.TypeGuard.IsObject(schema)) return Object(schema)
-    if (Types.TypeGuard.IsPromise(schema)) return Promise(schema)
+    if (Types.TypeGuard.IsPromise(schema)) return _Promise(schema)
     if (Types.TypeGuard.IsRecord(schema)) return Record(schema)
     if (Types.TypeGuard.IsRef(schema)) return Ref(schema)
     if (Types.TypeGuard.IsString(schema)) return String(schema)
@@ -264,7 +264,11 @@ export namespace ModelToIoTs {
   function Collect(schema: Types.TSchema) {
     return [...Visit(schema)].join(``)
   }
-  function GenerateType(model: TypeBoxModel, schema: Types.TSchema, references: Types.TSchema[]) {
+  async function GenerateType(
+    model: TypeBoxModel,
+    schema: Types.TSchema,
+    references: Types.TSchema[]
+  ) {
     const output: string[] = []
     for (const reference of references) {
       if (reference.$id === undefined) return UnsupportedType(schema)
@@ -276,11 +280,11 @@ export namespace ModelToIoTs {
       output.push(
         `export const ${schema.$id || `T`}: t.Type<${schema.$id}> = t.recursion('${
           schema.$id
-        }', () => ${Formatter.Format(type)})`
+        }', () => ${await Formatter.Format(type)})`
       )
     } else {
       output.push(`export type ${schema.$id} = t.TypeOf<typeof ${schema.$id}>`)
-      output.push(`export const ${schema.$id || `T`} = ${Formatter.Format(type)}`)
+      output.push(`export const ${schema.$id || `T`} = ${await Formatter.Format(type)}`)
     }
     if (schema.$id) emitted_set.add(schema.$id)
     return output.join('\n')
@@ -288,18 +292,21 @@ export namespace ModelToIoTs {
   const reference_map = new Map<string, Types.TSchema>()
   const recursive_set = new Set<string>()
   const emitted_set = new Set<string>()
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     support_types.clear()
     reference_map.clear()
     recursive_set.clear()
     emitted_set.clear()
-    const buffer: string[] = [`import * as t from 'io-ts'`, '']
-    const types = model.types
-      .filter((type) => Types.TypeGuard.IsSchema(type))
-      .map((type) => GenerateType(model, type, model.types))
-    buffer.push(...support_types.values())
-    buffer.push('\n')
-    buffer.push(...types)
-    return Formatter.Format(buffer.join('\n'))
+    const buffer: string[] = []
+
+    for (const type of model.types.filter((type) => Types.TypeGuard.IsSchema(type))) {
+      buffer.push(await GenerateType(model, type, model.types))
+    }
+
+    buffer.unshift(...support_types.values())
+    buffer.unshift(``)
+    buffer.unshift(`import * as t from 'io-ts'`)
+
+    return await Formatter.Format(buffer.join('\n'))
   }
 }

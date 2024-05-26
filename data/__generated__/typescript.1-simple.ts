@@ -1,9 +1,9 @@
-export type SubModel = {
+export type Simple_SubModel = {
   a: Date
   b: string
 }
-export const SubModel = (() => {
-  function check_SubModel(value: any): boolean {
+export const Simple_SubModel = (() => {
+  function check_Simple_95_SubModel(value: any): boolean {
     return (
       typeof value === 'object' &&
       value !== null &&
@@ -13,19 +13,19 @@ export const SubModel = (() => {
       typeof value.b === 'string'
     )
   }
-  return function check(value: any): value is SubModel {
-    return check_SubModel(value)
+  return function check(value: any): value is Simple_SubModel {
+    return check_Simple_95_SubModel(value)
   }
 })()
 
-export type Model = {
+export type Simple_Model = {
   a: number
   b: string
   c: boolean
-  d: Array<SubModel>
+  d: Array<Simple_SubModel>
 }
-export const Model = (() => {
-  function check_SubModel(value: any): boolean {
+export const Simple_Model = (() => {
+  function check_Simple_95_SubModel(value: any): boolean {
     return (
       typeof value === 'object' &&
       value !== null &&
@@ -35,7 +35,7 @@ export const Model = (() => {
       typeof value.b === 'string'
     )
   }
-  function check_Model(value: any): boolean {
+  function check_Simple_95_Model(value: any): boolean {
     return (
       typeof value === 'object' &&
       value !== null &&
@@ -44,10 +44,10 @@ export const Model = (() => {
       typeof value.b === 'string' &&
       typeof value.c === 'boolean' &&
       Array.isArray(value.d) &&
-      value.d.every((value: any) => check_SubModel(value))
+      value.d.every((value: any) => check_Simple_95_SubModel(value))
     )
   }
-  return function check(value: any): value is Model {
-    return check_Model(value)
+  return function check(value: any): value is Simple_Model {
+    return check_Simple_95_Model(value)
   }
 })()

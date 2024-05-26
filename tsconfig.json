@@ -6,9 +6,11 @@
     "moduleResolution": "Node",
     "baseUrl": ".",
     "types": ["node"],
+    "skipLibCheck": true,
     "paths": {
       "@tools/*": ["tools/*"]
     }
   },
-  "include": ["cli", "data", "tools"]
+  "include": ["cli", "data", "tools"],
+  "exclude": ["node_modules"]
 }

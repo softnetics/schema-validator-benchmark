@@ -158,13 +158,13 @@ export namespace ModelToJsonSchema {
     if (Types.TypeGuard.IsVoid(schema)) return Void(schema)
     return UnsupportedType(schema)
   }
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     const buffer: string[] = []
     for (const type of model.types.filter((type) => Types.TypeGuard.IsSchema(type))) {
       const schema = Visit(type)
       const encode = JSON.stringify(schema, null, 2)
       buffer.push(`export const ${type.$id} = ${encode}`)
     }
-    return Formatter.Format(buffer.join('\n'))
+    return await Formatter.Format(buffer.join('\n'))
   }
 }

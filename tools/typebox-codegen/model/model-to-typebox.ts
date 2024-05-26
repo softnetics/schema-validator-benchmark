@@ -26,7 +26,7 @@ THE SOFTWARE.
 import { TypeBoxModel } from './model'
 
 export namespace ModelToTypeBox {
-  export function Generate(model: TypeBoxModel) {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     return '// todo'
   }
 }

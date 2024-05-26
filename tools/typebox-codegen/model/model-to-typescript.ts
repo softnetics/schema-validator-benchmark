@@ -173,7 +173,7 @@ export namespace ModelToTypeScript {
     return `export type ${type.$id!} = ${Visit(type)}`
   }
   const reference_map = new Map<string, Types.TSchema>()
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     reference_map.clear()
     const definitions: string[] = []
     for (const type of model.types) {
@@ -193,6 +193,6 @@ export namespace ModelToTypeScript {
       `)
     }
     const output = [...definitions]
-    return Formatter.Format(output.join('\n\n'))
+    return await Formatter.Format(output.join('\n\n'))
   }
 }

@@ -37,7 +37,7 @@ const SchemaValidationLibrary = {
 type SchemaValidationLibrary =
   (typeof SchemaValidationLibrary)[keyof typeof SchemaValidationLibrary]
 
-function generateSchemaValidationLibrary(
+async function generateSchemaValidationLibrary(
   model: TypeBoxModel,
   type: SchemaValidationLibrary,
   file: string
@@ -56,31 +56,31 @@ function generateSchemaValidationLibrary(
     let content = ''
     switch (type) {
       case SchemaValidationLibrary.ZOD: {
-        content = ModelToZod.Generate(model)
+        content = await ModelToZod.Generate(model)
         break
       }
       case SchemaValidationLibrary.YUP: {
-        content = ModelToYup.Generate(model)
+        content = await ModelToYup.Generate(model)
         break
       }
       case SchemaValidationLibrary.VALIBOT: {
-        content = ModelToValibot.Generate(model)
+        content = await ModelToValibot.Generate(model)
         break
       }
       case SchemaValidationLibrary.ARKTYPE: {
-        content = ModelToArkType.Generate(model)
+        content = await ModelToArkType.Generate(model)
         break
       }
       case SchemaValidationLibrary.EFFECT: {
-        content = ModelToEffect.Generate(model)
+        content = await ModelToEffect.Generate(model)
         break
       }
       case SchemaValidationLibrary.IO_TS: {
-        content = ModelToIoTs.Generate(model)
+        content = await ModelToIoTs.Generate(model)
         break
       }
       case SchemaValidationLibrary.TYPESCRIPT: {
-        content = ModelToTypeScript.Generate(model)
+        content = await ModelToTypeScript.Generate(model)
         break
       }
       case SchemaValidationLibrary.TYPEBOX: {
@@ -117,14 +117,17 @@ export async function codegen() {
     const content = fs.readFileSync(modelPath)
     const model = TypeScriptToModel.Generate(content.toString())
 
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.ZOD, file)
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.YUP, file)
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.VALIBOT, file)
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.ARKTYPE, file)
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.EFFECT, file)
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.IO_TS, file)
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.TYPESCRIPT, file)
-    generateSchemaValidationLibrary(model, SchemaValidationLibrary.TYPEBOX, file)
+    await Promise.allSettled([
+      generateSchemaValidationLibrary(model, SchemaValidationLibrary.ZOD, file),
+      generateSchemaValidationLibrary(model, SchemaValidationLibrary.YUP, file),
+      generateSchemaValidationLibrary(model, SchemaValidationLibrary.VALIBOT, file),
+      // Generator is broken
+      // generateSchemaValidationLibrary(model, SchemaValidationLibrary.ARKTYPE, file),
+      generateSchemaValidationLibrary(model, SchemaValidationLibrary.EFFECT, file),
+      generateSchemaValidationLibrary(model, SchemaValidationLibrary.IO_TS, file),
+      generateSchemaValidationLibrary(model, SchemaValidationLibrary.TYPESCRIPT, file),
+      generateSchemaValidationLibrary(model, SchemaValidationLibrary.TYPEBOX, file),
+    ])
   }
 }
 

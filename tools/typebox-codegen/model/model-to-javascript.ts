@@ -28,7 +28,7 @@ import { TypeCompiler } from '@sinclair/typebox/compiler'
 import { TypeBoxModel } from './model'
 
 export namespace ModelToJavaScript {
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     const definitions: string[] = []
     const header = `// @ts-nocheck`
     for (const type of model.types) {

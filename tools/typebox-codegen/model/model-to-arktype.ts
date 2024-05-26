@@ -28,6 +28,10 @@ import * as Types from '@sinclair/typebox'
 import { Formatter, PropertyEncoder } from '../common/index'
 import { TypeBoxModel } from './model'
 
+function withBacktick(value: string) {
+  return '`' + `${value}` + '`'
+}
+
 // --------------------------------------------------------------------------
 // ModelToArkType
 // --------------------------------------------------------------------------
@@ -36,7 +40,7 @@ export namespace ModelToArkType {
   // Constraints
   // ------------------------------------------------------------------------
   function Wrap(value: string) {
-    return `'${value}'`
+    return withBacktick(value)
   }
   function Unwrap(value: string) {
     if (value.indexOf("'") !== 0) return value
@@ -252,7 +256,7 @@ export namespace ModelToArkType {
   }
   const reference_map = new Map<string, Types.TSchema>()
   const emitted_types = new Set<string>()
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     reference_map.clear()
     emitted_types.clear()
     const buffer: string[] = []

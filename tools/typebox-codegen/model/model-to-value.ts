@@ -28,7 +28,7 @@ import { Value } from '@sinclair/typebox/value'
 import { TypeBoxModel } from './model'
 
 export namespace ModelToValue {
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     const definitions: string[] = []
 
     for (const type of model.types) {

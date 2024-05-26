@@ -207,7 +207,11 @@ export namespace ModelToEffect {
   function Collect(schema: Types.TSchema) {
     return [...Visit(schema)].join(``)
   }
-  function GenerateType(model: TypeBoxModel, schema: Types.TSchema, references: Types.TSchema[]) {
+  async function GenerateType(
+    model: TypeBoxModel,
+    schema: Types.TSchema,
+    references: Types.TSchema[]
+  ) {
     const output: string[] = []
     for (const reference of references) {
       if (reference.$id === undefined) return UnsupportedType(schema)
@@ -215,14 +219,14 @@ export namespace ModelToEffect {
     }
     const type = Collect(schema)
     output.push(`export type ${schema.$id} = ET.Type<typeof ${schema.$id}>`)
-    output.push(`export const ${schema.$id || `T`} = ${Formatter.Format(type)}`)
+    output.push(`export const ${schema.$id || `T`} = ${await Formatter.Format(type)}`)
     if (schema.$id) emitted_set.add(schema.$id)
     return output.join('\n')
   }
   const reference_map = new Map<string, Types.TSchema>()
   const recursive_set = new Set<string>()
   const emitted_set = new Set<string>()
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     reference_map.clear()
     recursive_set.clear()
     emitted_set.clear()
@@ -231,7 +235,7 @@ export namespace ModelToEffect {
     buffer.push(`import { Schema as ES } from '@effect/schema'`)
     buffer.push(``)
     for (const type of model.types.filter((type) => Types.TypeGuard.IsSchema(type))) {
-      buffer.push(GenerateType(model, type, model.types))
+      buffer.push(await GenerateType(model, type, model.types))
     }
     return Formatter.Format(buffer.join('\n'))
   }

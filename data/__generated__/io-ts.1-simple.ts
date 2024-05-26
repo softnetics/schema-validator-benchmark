@@ -7,17 +7,16 @@ const t_Date = new t.Type<Date, Date, unknown>(
     value instanceof Date ? t.success(value) : t.failure(value, context),
   t.identity
 )
-
-export type SubModel = t.TypeOf<typeof SubModel>
-export const SubModel = t.type({
+export type Simple_SubModel = t.TypeOf<typeof Simple_SubModel>
+export const Simple_SubModel = t.type({
   a: t_Date,
   b: t.string
 })
 
-export type Model = t.TypeOf<typeof Model>
-export const Model = t.type({
+export type Simple_Model = t.TypeOf<typeof Simple_Model>
+export const Simple_Model = t.type({
   a: t.number,
   b: t.string,
   c: t.boolean,
-  d: t.array(SubModel)
+  d: t.array(Simple_SubModel)
 })

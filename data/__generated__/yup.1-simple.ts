@@ -1,15 +1,15 @@
-import y from 'yup'
+import * as y from 'yup'
 
-export type SubModel = y.InferType<typeof SubModel>
-export const SubModel = y.object({
+export type Simple_SubModel = y.InferType<typeof Simple_SubModel>
+export const Simple_SubModel = y.object({
   a: y.date().required(),
   b: y.string().required()
 })
 
-export type Model = y.InferType<typeof Model>
-export const Model = y.object({
+export type Simple_Model = y.InferType<typeof Simple_Model>
+export const Simple_Model = y.object({
   a: y.number().required(),
   b: y.string().required(),
   c: y.boolean().required(),
-  d: y.array(SubModel)
+  d: y.array(Simple_SubModel)
 })

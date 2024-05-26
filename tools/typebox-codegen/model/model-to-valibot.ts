@@ -204,7 +204,11 @@ export namespace ModelToValibot {
   function Collect(schema: Types.TSchema) {
     return [...Visit(schema)].join(``)
   }
-  function GenerateType(model: TypeBoxModel, schema: Types.TSchema, references: Types.TSchema[]) {
+  async function GenerateType(
+    model: TypeBoxModel,
+    schema: Types.TSchema,
+    references: Types.TSchema[]
+  ) {
     const output: string[] = []
     for (const reference of references) {
       if (reference.$id === undefined) return UnsupportedType(schema)
@@ -216,11 +220,11 @@ export namespace ModelToValibot {
       output.push(
         `export const ${schema.$id || `T`}: v.InferOutput<${
           schema.$id
-        }> = v.lazy(() => ${Formatter.Format(type)})`
+        }> = v.lazy(() => ${await Formatter.Format(type)})`
       )
     } else {
       output.push(`export type ${schema.$id} = v.InferOutput<typeof ${schema.$id}>`)
-      output.push(`export const ${schema.$id || `T`} = ${Formatter.Format(type)}`)
+      output.push(`export const ${schema.$id || `T`} = ${await Formatter.Format(type)}`)
     }
     if (schema.$id) emitted_set.add(schema.$id)
     return output.join('\n')
@@ -228,14 +232,14 @@ export namespace ModelToValibot {
   const reference_map = new Map<string, Types.TSchema>()
   const recursive_set = new Set<string>()
   const emitted_set = new Set<string>()
-  export function Generate(model: TypeBoxModel): string {
+  export async function Generate(model: TypeBoxModel): Promise<string> {
     reference_map.clear()
     recursive_set.clear()
     emitted_set.clear()
     const buffer: string[] = [`import * as v from 'valibot'`, '']
     for (const type of model.types.filter((type) => Types.TypeGuard.IsSchema(type))) {
-      buffer.push(GenerateType(model, type, model.types))
+      buffer.push(await GenerateType(model, type, model.types))
     }
-    return Formatter.Format(buffer.join('\n'))
+    return await Formatter.Format(buffer.join('\n'))
   }
 }
