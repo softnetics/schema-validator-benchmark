@@ -8,9 +8,9 @@
     "types": ["node"],
     "skipLibCheck": true,
     "paths": {
-      "@tools/*": ["tools/*"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["cli", "data", "tools"],
+  "include": ["src", "data"],
   "exclude": ["node_modules"]
 }

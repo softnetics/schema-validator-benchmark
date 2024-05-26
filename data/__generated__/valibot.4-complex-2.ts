@@ -129,3 +129,17 @@ export const Complex2_CompleteState = v.object({
     completeDetails: v.array(v.string())
   })
 })
+
+export type Complex2_WorkflowState = v.InferOutput<
+  typeof Complex2_WorkflowState
+>
+export const Complex2_WorkflowState = v.union([
+  Complex2_InitialState,
+  Complex2_LoadingState,
+  Complex2_ValidationState,
+  Complex2_ProcessingState,
+  Complex2_SuccessState,
+  Complex2_ErrorState,
+  Complex2_RetryState,
+  Complex2_CompleteState
+])

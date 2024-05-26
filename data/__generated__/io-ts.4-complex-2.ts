@@ -123,3 +123,15 @@ export const Complex2_CompleteState = t.type({
     completeDetails: t.array(t.string)
   })
 })
+
+export type Complex2_WorkflowState = t.TypeOf<typeof Complex2_WorkflowState>
+export const Complex2_WorkflowState = t.union([
+  Complex2_InitialState,
+  Complex2_LoadingState,
+  Complex2_ValidationState,
+  Complex2_ProcessingState,
+  Complex2_SuccessState,
+  Complex2_ErrorState,
+  Complex2_RetryState,
+  Complex2_CompleteState
+])

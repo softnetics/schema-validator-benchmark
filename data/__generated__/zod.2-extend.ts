@@ -8,8 +8,7 @@ export const Extend_BaseSubModel = z.object({
 })
 
 export type Extend_SubModel1 = z.infer<typeof Extend_SubModel1>
-export const Extend_SubModel1 = z.intersection(
-  Extend_BaseSubModel,
+export const Extend_SubModel1 = Extend_BaseSubModel.merge(
   z.object({
     type: z.literal('submodel1'),
     id: z.string(),
@@ -18,8 +17,7 @@ export const Extend_SubModel1 = z.intersection(
 )
 
 export type Extend_SubModel2 = z.infer<typeof Extend_SubModel2>
-export const Extend_SubModel2 = z.intersection(
-  Extend_BaseSubModel,
+export const Extend_SubModel2 = Extend_BaseSubModel.merge(
   z.object({
     type: z.literal('submodel2'),
     id: z.number(),
@@ -28,8 +26,7 @@ export const Extend_SubModel2 = z.intersection(
 )
 
 export type Extend_SubModel3 = z.infer<typeof Extend_SubModel3>
-export const Extend_SubModel3 = z.intersection(
-  Extend_BaseSubModel,
+export const Extend_SubModel3 = Extend_BaseSubModel.merge(
   z.object({
     type: z.literal('submodel3'),
     a: z.boolean(),
@@ -42,8 +39,7 @@ export const Extend_SubModel = z.union([
   Extend_SubModel1,
   Extend_SubModel2,
   Extend_SubModel3,
-  z.intersection(
-    Extend_BaseSubModel,
+  Extend_BaseSubModel.merge(
     z.object({
       type: z.literal('submodel4'),
       id: z.any(),

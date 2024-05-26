@@ -141,3 +141,18 @@ export const Complex2_CompleteState = y.object({
     completeDetails: y.array(y.string().required())
   })
 })
+
+export type Complex2_WorkflowState = y.InferType<typeof Complex2_WorkflowState>
+export const Complex2_WorkflowState = y
+  .mixed()
+  .oneOf([
+    Complex2_InitialState,
+    Complex2_LoadingState,
+    Complex2_ValidationState,
+    Complex2_ProcessingState,
+    Complex2_SuccessState,
+    Complex2_ErrorState,
+    Complex2_RetryState,
+    Complex2_CompleteState
+  ])
+  .required()

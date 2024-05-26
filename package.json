@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "run:codegen": "bun ./cli/codegen.ts"
+    "run:codegen": "bun ./src/cli/codegen.ts",
+    "run:evaluate": "bun ./src/cli/evaluate.ts"
   },
   "keywords": [],
   "author": "",

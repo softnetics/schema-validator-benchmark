@@ -702,3 +702,208 @@ export const Complex2_CompleteState = (() => {
     return check_Complex2_95_CompleteState(value)
   }
 })()
+
+export type Complex2_WorkflowState =
+  | Complex2_InitialState
+  | Complex2_LoadingState
+  | Complex2_ValidationState
+  | Complex2_ProcessingState
+  | Complex2_SuccessState
+  | Complex2_ErrorState
+  | Complex2_RetryState
+  | Complex2_CompleteState
+export const Complex2_WorkflowState = (() => {
+  function check_Complex2_95_InitialState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'initial' &&
+      typeof value.createdAt === 'string' &&
+      typeof value.userId === 'string' &&
+      typeof value.details === 'object' &&
+      value.details !== null &&
+      !Array.isArray(value.details) &&
+      typeof value.details.description === 'string' &&
+      (value.details.priority === 'low' ||
+        value.details.priority === 'medium' ||
+        value.details.priority === 'high') &&
+      typeof value.details.nestedDetails === 'object' &&
+      value.details.nestedDetails !== null &&
+      !Array.isArray(value.details.nestedDetails) &&
+      Number.isFinite(value.details.nestedDetails.nestedField1) &&
+      typeof value.details.nestedDetails.nestedField2 === 'string'
+    )
+  }
+  function check_Complex2_95_LoadingState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'loading' &&
+      typeof value.startedAt === 'string' &&
+      typeof value.userId === 'string' &&
+      Number.isFinite(value.progress) &&
+      check_Complex2_95_InitialState(value.previousState) &&
+      typeof value.nestedState === 'object' &&
+      value.nestedState !== null &&
+      !Array.isArray(value.nestedState) &&
+      typeof value.nestedState.loadingStep === 'string' &&
+      Number.isFinite(value.nestedState.loadingProgress)
+    )
+  }
+  function check_Complex2_95_ValidationState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'validating' &&
+      typeof value.validationStartedAt === 'string' &&
+      typeof value.userId === 'string' &&
+      Array.isArray(value.steps) &&
+      value.steps.every(
+        (value: any) =>
+          typeof value === 'object' &&
+          value !== null &&
+          !Array.isArray(value) &&
+          typeof value.stepName === 'string' &&
+          typeof value.completed === 'boolean' &&
+          (value.details !== undefined
+            ? typeof value.details === 'string'
+            : true)
+      ) &&
+      check_Complex2_95_LoadingState(value.previousState) &&
+      typeof value.nestedState === 'object' &&
+      value.nestedState !== null &&
+      !Array.isArray(value.nestedState) &&
+      typeof value.nestedState.validationStep === 'string' &&
+      Number.isFinite(value.nestedState.validationProgress)
+    )
+  }
+  function check_Complex2_95_ProcessingState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'processing' &&
+      typeof value.processingStartedAt === 'string' &&
+      typeof value.userId === 'string' &&
+      Array.isArray(value.tasks) &&
+      value.tasks.every(
+        (value: any) =>
+          typeof value === 'object' &&
+          value !== null &&
+          !Array.isArray(value) &&
+          typeof value.taskId === 'string' &&
+          typeof value.taskName === 'string' &&
+          typeof value.completed === 'boolean' &&
+          (value.result !== undefined ? true : true)
+      ) &&
+      check_Complex2_95_ValidationState(value.previousState) &&
+      typeof value.nestedState === 'object' &&
+      value.nestedState !== null &&
+      !Array.isArray(value.nestedState) &&
+      typeof value.nestedState.processingStep === 'string' &&
+      Number.isFinite(value.nestedState.processingProgress)
+    )
+  }
+  function check_Complex2_95_SuccessState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'success' &&
+      typeof value.finishedAt === 'string' &&
+      typeof value.userId === 'string' &&
+      true &&
+      'data' in value &&
+      check_Complex2_95_ProcessingState(value.previousState) &&
+      typeof value.nestedState === 'object' &&
+      value.nestedState !== null &&
+      !Array.isArray(value.nestedState) &&
+      typeof value.nestedState.successStep === 'string' &&
+      Array.isArray(value.nestedState.successDetails) &&
+      value.nestedState.successDetails.every(
+        (value: any) => typeof value === 'string'
+      )
+    )
+  }
+  function check_Complex2_95_ErrorState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'error' &&
+      typeof value.errorOccurredAt === 'string' &&
+      typeof value.userId === 'string' &&
+      Number.isFinite(value.errorCode) &&
+      typeof value.errorMessage === 'string' &&
+      typeof value.retryable === 'boolean' &&
+      typeof value.nestedState === 'object' &&
+      value.nestedState !== null &&
+      !Array.isArray(value.nestedState) &&
+      typeof value.nestedState.errorStep === 'string' &&
+      Array.isArray(value.nestedState.errorDetails) &&
+      value.nestedState.errorDetails.every(
+        (value: any) => typeof value === 'string'
+      )
+    )
+  }
+  function check_Complex2_95_RetryState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'retry' &&
+      Number.isFinite(value.retryCount) &&
+      typeof value.retryAfter === 'string' &&
+      typeof value.userId === 'string' &&
+      check_Complex2_95_ErrorState(value.previousState) &&
+      typeof value.nestedState === 'object' &&
+      value.nestedState !== null &&
+      !Array.isArray(value.nestedState) &&
+      typeof value.nestedState.retryStep === 'string' &&
+      Array.isArray(value.nestedState.retryDetails) &&
+      value.nestedState.retryDetails.every(
+        (value: any) => typeof value === 'string'
+      )
+    )
+  }
+  function check_Complex2_95_CompleteState(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      value.status === 'complete' &&
+      typeof value.completedAt === 'string' &&
+      typeof value.userId === 'string' &&
+      true &&
+      'finalResult' in value &&
+      (check_Complex2_95_SuccessState(value.previousState) ||
+        check_Complex2_95_ErrorState(value.previousState)) &&
+      typeof value.nestedState === 'object' &&
+      value.nestedState !== null &&
+      !Array.isArray(value.nestedState) &&
+      typeof value.nestedState.completeStep === 'string' &&
+      Array.isArray(value.nestedState.completeDetails) &&
+      value.nestedState.completeDetails.every(
+        (value: any) => typeof value === 'string'
+      )
+    )
+  }
+  function check_Complex2_95_WorkflowState(value: any): boolean {
+    return (
+      check_Complex2_95_InitialState(value) ||
+      check_Complex2_95_LoadingState(value) ||
+      check_Complex2_95_ValidationState(value) ||
+      check_Complex2_95_ProcessingState(value) ||
+      check_Complex2_95_SuccessState(value) ||
+      check_Complex2_95_ErrorState(value) ||
+      check_Complex2_95_RetryState(value) ||
+      check_Complex2_95_CompleteState(value)
+    )
+  }
+  return function check(value: any): value is Complex2_WorkflowState {
+    return check_Complex2_95_WorkflowState(value)
+  }
+})()

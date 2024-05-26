@@ -1,13 +1,3 @@
-export type Complex2_WorkflowState =
-  | Complex2_InitialState
-  | Complex2_LoadingState
-  | Complex2_ValidationState
-  | Complex2_ProcessingState
-  | Complex2_SuccessState
-  | Complex2_ErrorState
-  | Complex2_RetryState
-  | Complex2_CompleteState
-
 type Complex2_InitialState = {
   status: 'initial'
   createdAt: string // ISO 8601 date string
@@ -115,3 +105,13 @@ type Complex2_CompleteState = {
     completeDetails: string[]
   }
 }
+
+export type Complex2_WorkflowState =
+  | Complex2_InitialState
+  | Complex2_LoadingState
+  | Complex2_ValidationState
+  | Complex2_ProcessingState
+  | Complex2_SuccessState
+  | Complex2_ErrorState
+  | Complex2_RetryState
+  | Complex2_CompleteState

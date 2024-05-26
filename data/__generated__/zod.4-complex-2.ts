@@ -123,3 +123,15 @@ export const Complex2_CompleteState = z.object({
     completeDetails: z.array(z.string())
   })
 })
+
+export type Complex2_WorkflowState = z.infer<typeof Complex2_WorkflowState>
+export const Complex2_WorkflowState = z.union([
+  Complex2_InitialState,
+  Complex2_LoadingState,
+  Complex2_ValidationState,
+  Complex2_ProcessingState,
+  Complex2_SuccessState,
+  Complex2_ErrorState,
+  Complex2_RetryState,
+  Complex2_CompleteState
+])

@@ -124,3 +124,15 @@ export const Complex2_CompleteState = ES.Struct({
     completeDetails: ES.Array(ES.String)
   })
 })
+
+export type Complex2_WorkflowState = ET.Type<typeof Complex2_WorkflowState>
+export const Complex2_WorkflowState = ES.Union(
+  Complex2_InitialState,
+  Complex2_LoadingState,
+  Complex2_ValidationState,
+  Complex2_ProcessingState,
+  Complex2_SuccessState,
+  Complex2_ErrorState,
+  Complex2_RetryState,
+  Complex2_CompleteState
+)

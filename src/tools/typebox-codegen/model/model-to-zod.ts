@@ -86,7 +86,7 @@ export namespace ModelToZod {
       if (rest.length === 0) return `z.never()`
       if (rest.length === 1) return Visit(rest[0])
       const [left, right] = [rest[0], rest.slice(1)]
-      return Type(schema, `z.intersection(${Visit(left)}, ${reduce(right)})`)
+      return Type(schema, `${Visit(left)}.merge(${reduce(right)})`)
     }
     return reduce(schema.allOf)
   }

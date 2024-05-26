@@ -47,8 +47,8 @@ export const Complex1_LoggingConfig = z.object({
 })
 
 export type Complex1_Config = z.infer<typeof Complex1_Config>
-export const Complex1_Config = z.intersection(
-  z.object({
+export const Complex1_Config = z
+  .object({
     appName: z.string(),
     version: z.string(),
     environment: Complex1_Environment,
@@ -60,9 +60,10 @@ export const Complex1_Config = z.intersection(
     }),
     featureFlags: Complex1_FeatureFlags,
     logging: Complex1_LoggingConfig
-  }),
-  z.object({
-    enableNewFeature: z.boolean(),
-    betaUsersOnly: z.boolean()
   })
-)
+  .merge(
+    z.object({
+      enableNewFeature: z.boolean(),
+      betaUsersOnly: z.boolean()
+    })
+  )

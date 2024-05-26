@@ -1,18 +1,6 @@
 import { Type, Static } from '@sinclair/typebox'
 
 
-export type Complex2_WorkflowState = Static<typeof Complex2_WorkflowState>
-export const Complex2_WorkflowState = Type.Union([
-Complex2_InitialState,
-Complex2_LoadingState,
-Complex2_ValidationState,
-Complex2_ProcessingState,
-Complex2_SuccessState,
-Complex2_ErrorState,
-Complex2_RetryState,
-Complex2_CompleteState
-])
-
 type Complex2_InitialState = Static<typeof Complex2_InitialState>
 const Complex2_InitialState = Type.Object({
 status: Type.Literal('initial'),
@@ -135,3 +123,15 @@ completeStep: Type.String(),
 completeDetails: Type.Array(Type.String())
 })
 })
+
+export type Complex2_WorkflowState = Static<typeof Complex2_WorkflowState>
+export const Complex2_WorkflowState = Type.Union([
+Complex2_InitialState,
+Complex2_LoadingState,
+Complex2_ValidationState,
+Complex2_ProcessingState,
+Complex2_SuccessState,
+Complex2_ErrorState,
+Complex2_RetryState,
+Complex2_CompleteState
+])
