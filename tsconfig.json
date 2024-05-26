@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "@tools/*": ["tools/*"]
+    }
+  },
+  "include": ["cli", "data", "tools"]
+}
