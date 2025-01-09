@@ -1,0 +1,66 @@
+name: Evaluate Test Cases
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: 20.16.0
+  PNPM_VERSION: 9.14.2
+  BUN_VERSION: 1.1.10
+
+permissions:
+  actions: read
+  checks: read
+  contents: write
+  deployments: read
+  issues: write
+  discussions: read
+  packages: write
+  pull-requests: write
+  repository-projects: write
+  security-events: read
+  statuses: write
+
+jobs:
+  evaluate:
+    name: Evaluate
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 20
+
+    concurrency:
+      group: ci-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run evaluate
+        run: pnpm run:evaluate
+
+      - name: Upload results
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: update __benchmark__ results
