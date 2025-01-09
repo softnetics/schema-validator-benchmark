@@ -1,0 +1,5 @@
+Bind time:                   0.33s
+Check time:                  0.37s
+printTime time:              0.00s
+Emit time:                   0.00s
+Total time:                  1.49s
