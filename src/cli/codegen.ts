@@ -1,5 +1,10 @@
 import { SchemaValidationLibrary } from '@/constants/libary'
-import { DATA_DIR_NAME, GENERATED_DIR_NAME } from '@/constants/path'
+import {
+  COMMON_DIR_NAME,
+  CUSTOM_DIR_NAME,
+  DATA_DIR_NAME,
+  GENERATED_DIR_NAME,
+} from '@/constants/path'
 import {
   Formatter,
   ModelToArkType,
@@ -14,30 +19,28 @@ import {
   TypeScriptToTypeBox,
 } from '@/tools/typebox-codegen'
 import { cleanDir } from '@/utils/clean-dir'
+import { extractFileName } from '@/utils/extract-file-name'
 import { writeFile } from '@/utils/write-file'
 import * as fs from 'node:fs'
 import * as path from 'node:path'
 
-function extractFileName(file: string) {
-  const strings = file.split('.')
-  const fileExtension = strings[strings.length - 1]
-  const fileName = strings.slice(0, strings.length - 1).join('.')
-  return [fileName, fileExtension]
-}
-
 async function generateSchemaValidationLibrary(
   model: TypeBoxModel,
-  type: SchemaValidationLibrary,
+  library: SchemaValidationLibrary,
   file: string
 ) {
   const cwd = process.cwd()
-  const [fileName, fileExtension] = extractFileName(file)
+  const { fileExtension, testCaseName } = extractFileName(file)
 
-  const outputPath = path.join(cwd, GENERATED_DIR_NAME, `${type}.${fileName}.${fileExtension}`)
+  const outputPath = path.join(
+    cwd,
+    GENERATED_DIR_NAME,
+    `${testCaseName}.${library}.${fileExtension}`
+  )
 
   try {
     let content = ''
-    switch (type) {
+    switch (library) {
       case SchemaValidationLibrary.ZOD: {
         content = await ModelToZod.Generate(model)
         break
@@ -50,7 +53,7 @@ async function generateSchemaValidationLibrary(
         content = await ModelToValibot.Generate(model)
         break
       }
-      // Generator is broken
+      // TODO: Generator is broken
       // case SchemaValidationLibrary.ARKTYPE: {
       //   content = await ModelToArkType.Generate(model)
       //   break
@@ -68,7 +71,7 @@ async function generateSchemaValidationLibrary(
         break
       }
       case SchemaValidationLibrary.TYPEBOX: {
-        const modelPath = path.join(cwd, DATA_DIR_NAME, file)
+        const modelPath = path.join(cwd, COMMON_DIR_NAME, file)
         content = TypeScriptToTypeBox.Generate(
           await Formatter.Format(fs.readFileSync(modelPath).toString())
         )
@@ -84,24 +87,32 @@ async function generateSchemaValidationLibrary(
   }
 }
 
-export async function codegen() {
+async function main() {
   const cwd = process.cwd()
-  const directory = fs.readdirSync('data', 'utf-8').sort()
 
+  // 1. Clear the generated directory
   cleanDir(path.join(cwd, GENERATED_DIR_NAME))
 
-  for (const file of directory) {
-    if (file.includes('__')) continue
+  // 2. Read all files in the common directory
+  for (const fileName of fs.readdirSync(COMMON_DIR_NAME, 'utf-8')) {
+    const modelPath = path.join(cwd, COMMON_DIR_NAME, fileName)
 
-    const modelPath = path.join(cwd, DATA_DIR_NAME, file)
-
+    // 3. Convert TypeScript to TypeBox
     const content = fs.readFileSync(modelPath)
     const model = TypeScriptToModel.Generate(content.toString())
 
+    // 4. Convert TypeBox to other schema validation libraries
     for (const type of Object.values(SchemaValidationLibrary)) {
-      await generateSchemaValidationLibrary(model, type, file)
+      await generateSchemaValidationLibrary(model, type, fileName)
     }
+  }
+
+  // 5. Copy custom files to the generated directory
+  for (const fileName of fs.readdirSync(CUSTOM_DIR_NAME, 'utf-8')) {
+    const srcPath = path.join(cwd, CUSTOM_DIR_NAME, fileName)
+    const destPath = path.join(cwd, GENERATED_DIR_NAME, fileName)
+    fs.copyFileSync(srcPath, destPath)
   }
 }
 
-codegen()
+main()

@@ -1,3 +1,5 @@
-export const DATA_DIR_NAME = 'data'
-export const GENERATED_DIR_NAME = 'data/__generated__'
-export const BENCHMARK_DIR_NAME = 'data/__benchmark__'
+export const DATA_DIR_NAME = 'samples'
+export const COMMON_DIR_NAME = 'samples/common'
+export const CUSTOM_DIR_NAME = 'samples/custom'
+export const GENERATED_DIR_NAME = 'samples/__generated__'
+export const BENCHMARK_DIR_NAME = 'samples/__benchmark__'
