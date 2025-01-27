@@ -56,6 +56,17 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 'pypy3.13'
+          cache: 'pip' # caching pip dependencies
+
+      - name: Restore cached virtualenv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv-${{ runner.os }}-${{ steps.setup_python.outputs.python-version }}-${{ hashFiles('requirements.txt') }}
+          path: .venv
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
