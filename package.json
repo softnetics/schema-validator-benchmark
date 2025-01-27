@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "prepare:venv": "python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt",
+    "prepare:venv": "python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt",
     "run:codegen": "bun ./src/cli/codegen.ts",
     "run:evaluate": "bun ./src/cli/evaluate.ts",
     "run:report": "source .venv/bin/activate && python3 reports/main.py"
