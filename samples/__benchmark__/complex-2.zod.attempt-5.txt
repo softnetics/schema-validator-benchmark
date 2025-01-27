@@ -1,26 +1,26 @@
 Lines of Library:            38411
-Lines of Definitions:        50858
+Lines of Definitions:        50896
 Lines of TypeScript:           138
 Lines of JavaScript:             0
 Lines of JSON:                   0
 Lines of Other:                  0
-Identifiers:                 82602
-Symbols:                     82044
-Types:                       11771
-Instantiations:              41856
-Memory used:               115229K
-Assignability cache size:     3847
-Identity cache size:           444
+Identifiers:                 82580
+Symbols:                     85689
+Types:                       13090
+Instantiations:              57552
+Memory used:               112352K
+Assignability cache size:     4307
+Identity cache size:           474
 Subtype cache size:              0
 Strict subtype cache size:       0
 I/O Read time:               0.03s
 Parse time:                  0.65s
-ResolveModule time:          0.04s
+ResolveModule time:          0.03s
 ResolveTypeReference time:   0.01s
-ResolveLibrary time:         0.02s
-Program time:                0.80s
-Bind time:                   0.32s
+ResolveLibrary time:         0.01s
+Program time:                0.77s
+Bind time:                   0.33s
 Check time:                  0.69s
 printTime time:              0.00s
 Emit time:                   0.00s
-Total time:                  1.82s
+Total time:                  1.79s

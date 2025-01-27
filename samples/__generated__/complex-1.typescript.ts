@@ -124,6 +124,30 @@ export type Complex1_Config = {
   betaUsersOnly: boolean
 }
 export const Complex1_Config = (() => {
+  function check_Complex1_95_Config(value: any): boolean {
+    return (
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      typeof value.appName === 'string' &&
+      typeof value.version === 'string' &&
+      check_Complex1_95_Environment(value.environment) &&
+      check_Complex1_95_DatabaseConfig(value.database) &&
+      typeof value.services === 'object' &&
+      value.services !== null &&
+      !Array.isArray(value.services) &&
+      check_Complex1_95_ServiceEndpoint(value.services.authService) &&
+      check_Complex1_95_ServiceEndpoint(value.services.paymentService) &&
+      check_Complex1_95_ServiceEndpoint(value.services.notificationService) &&
+      check_Complex1_95_FeatureFlags(value.featureFlags) &&
+      check_Complex1_95_LoggingConfig(value.logging) &&
+      typeof value === 'object' &&
+      value !== null &&
+      !Array.isArray(value) &&
+      typeof value.enableNewFeature === 'boolean' &&
+      typeof value.betaUsersOnly === 'boolean'
+    )
+  }
   function check_Complex1_95_Environment(value: any): boolean {
     return (
       value === 'development' || value === 'staging' || value === 'production'
@@ -178,30 +202,6 @@ export const Complex1_Config = (() => {
       (value.remoteUrl !== undefined
         ? typeof value.remoteUrl === 'string'
         : true)
-    )
-  }
-  function check_Complex1_95_Config(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.appName === 'string' &&
-      typeof value.version === 'string' &&
-      check_Complex1_95_Environment(value.environment) &&
-      check_Complex1_95_DatabaseConfig(value.database) &&
-      typeof value.services === 'object' &&
-      value.services !== null &&
-      !Array.isArray(value.services) &&
-      check_Complex1_95_ServiceEndpoint(value.services.authService) &&
-      check_Complex1_95_ServiceEndpoint(value.services.paymentService) &&
-      check_Complex1_95_ServiceEndpoint(value.services.notificationService) &&
-      check_Complex1_95_FeatureFlags(value.featureFlags) &&
-      check_Complex1_95_LoggingConfig(value.logging) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.enableNewFeature === 'boolean' &&
-      typeof value.betaUsersOnly === 'boolean'
     )
   }
   return function check(value: any): value is Complex1_Config {
