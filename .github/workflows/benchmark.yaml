@@ -59,8 +59,14 @@ jobs:
       - uses: actions/setup-python@v5
         id: setup_python
         with:
-          python-version: 'pypy3.13'
-          cache: 'pip' # caching pip dependencies
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Restore cached virtualenv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv-${{ runner.os }}-${{ steps.setup_python.outputs.python-version }}-${{ hashFiles('requirements.txt') }}
+          path: .venv
 
       - name: Restore cached virtualenv
         uses: actions/cache/restore@v4
@@ -78,6 +84,7 @@ jobs:
         run: pnpm run:evaluate
 
       - name: Prepare venv
+        shell: bash
         run: pnpm prepare:venv
 
       - name: Run generate report
@@ -87,3 +94,9 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: update __benchmark__ and __assets__ results
+
+      - name: Saved cached virtualenv
+        uses: actions/cache/save@v4
+        with:
+          key: venv-${{ runner.os }}-${{ steps.setup_python.outputs.python-version }}-${{ hashFiles('requirements.txt') }}
+          path: .venv
