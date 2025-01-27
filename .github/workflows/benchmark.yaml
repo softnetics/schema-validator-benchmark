@@ -3,7 +3,9 @@ on:
   push:
     branches:
       - main
-
+    paths:
+      - 'src/**'
+      - 'reports/**'
 env:
   NODE_VERSION: 20.16.0
   PNPM_VERSION: 9.14.2
@@ -25,7 +27,7 @@ permissions:
 jobs:
   evaluate:
     name: Evaluate
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     timeout-minutes: 20
 
@@ -58,9 +60,18 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run evaluate
+        run: pnpm run:codegen
+
+      - name: Run evaluate
         run: pnpm run:evaluate
+
+      - name: Prepare venv
+        run: pnpm prepare:venv
+
+      - name: Run generate report
+        run: pnpm run:report
 
       - name: Upload results
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: update __benchmark__ results
+          commit_message: update __benchmark__ and __assets__ results
