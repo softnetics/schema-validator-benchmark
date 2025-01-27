@@ -1,4 +1,4 @@
-import { SchemaValidationLibrary } from '@/constants/libary'
+import { SchemaValidationLibrary } from '@/constants/library'
 import {
   COMMON_DIR_NAME,
   CUSTOM_DIR_NAME,
