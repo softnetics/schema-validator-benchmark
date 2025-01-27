@@ -1,4 +1,1 @@
-Check time:                  0.10s
-printTime time:              0.00s
-Emit time:                   0.00s
-Total time:                  1.31s
+Total time:                  1.40s
