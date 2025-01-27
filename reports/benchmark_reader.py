@@ -16,6 +16,11 @@ class BenchmarkReader:
             "Check time",
             "Emit time",
             "Total time",
+            "Identifiers",
+            "Types",
+            "Symbols",
+            "I/O Write time",
+            "I/O Read time",
         ]
         self.benchmarks = self._buildBenchmarks(self.metrics, self.files)
 

@@ -17,31 +17,37 @@ class BenchmarkPlotter:
             "zod": "#e377c2",   
         }
         self.metrics = [
-            "Memory used",
-            "Program time",
-            "Check time",
-            "Total time",
+            {"name": "Memory used", "unit": "Megabytes"},
+            {"name": "Program time", "unit": "Seconds"},
+            {"name": "Check time", "unit": "Seconds"},
+            {"name": "Total time", "unit": "Seconds"},
+            {"name": "Identifiers", "unit": "Count"},
+            {"name": "Types", "unit": "Count"},
+            {"name": "Symbols", "unit": "Count"},
+            {"name": "I/O Read time", "unit": "Seconds"},
         ]
 
     def plot(self):
         for metric in self.metrics:
-            self._plotMetric(metric)
+            self._plotMetric(metricName=metric["name"], unit=metric["unit"])
 
-    def _plotMetric(self, metric: str):
+    def _plotMetric(self, metricName: str, unit: str):
         df = self.benchmarks.reset_index()
-        df = df[["Name", "Library", metric]]
-        df = df.sort_values(by=[metric], ascending=False)
+        df = df[["Name", "Library", metricName]]
+        df = df.sort_values(by=[metricName], ascending=False)
         grouped = df.groupby(by=["Name"])
         
         fig = plt.figure(figsize=(8, 12))
-        fig.suptitle(f'{metric} comparison', fontsize=24)
+        fig.suptitle(f'{metricName} comparison', fontsize=24)
 
         for i, (names, group) in enumerate(grouped):
             ax = plt.subplot(len(grouped), 1, i + 1)
             colors = [self.colorMap[lib] for lib in group["Library"]]
-            ax.barh(y=group["Library"], width=group[metric], color=colors)
+            ax.barh(y=group["Library"], width=group[metricName], color=colors)
             ax.set_title(names[0])
+            ax.set_xlabel(unit)
             ax.plot()
 
-        plt.subplots_adjust(wspace=0, hspace=0.5)
-        plt.savefig(os.path.join(self.dir, f"{metric}.png"))
+        fileName = metricName.replace(" ", "_").replace("/", "_").lower()
+        plt.subplots_adjust(wspace=0, hspace=0.8)
+        plt.savefig(os.path.join(self.dir, f"{fileName}.png"))
