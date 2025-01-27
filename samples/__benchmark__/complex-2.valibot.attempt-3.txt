@@ -1,3 +1,4 @@
+Files:                         140
 Lines of Library:            38411
 Lines of Definitions:        63277
 Lines of TypeScript:           146
@@ -8,19 +9,19 @@ Identifiers:                102989
 Symbols:                     66832
 Types:                        4520
 Instantiations:              33759
-Memory used:               111441K
+Memory used:               106207K
 Assignability cache size:     1551
 Identity cache size:           169
 Subtype cache size:             22
 Strict subtype cache size:       0
-I/O Read time:               0.02s
-Parse time:                  0.73s
+I/O Read time:               0.03s
+Parse time:                  0.77s
 ResolveModule time:          0.04s
 ResolveTypeReference time:   0.01s
 ResolveLibrary time:         0.01s
-Program time:                0.86s
+Program time:                0.91s
 Bind time:                   0.34s
 Check time:                  0.42s
 printTime time:              0.00s
 Emit time:                   0.00s
-Total time:                  1.62s
+Total time:                  1.67s
