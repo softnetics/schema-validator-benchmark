@@ -57,6 +57,7 @@ jobs:
           cache: pnpm
 
       - uses: actions/setup-python@v5
+        id: setup_python
         with:
           python-version: 'pypy3.13'
           cache: 'pip' # caching pip dependencies
