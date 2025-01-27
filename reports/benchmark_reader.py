@@ -46,8 +46,14 @@ class BenchmarkReader:
                     line.split(":")[0].strip(),
                     line.split(":")[1].strip(),
                 ]
+                
+                num = float(re.search(r"\d+", value).group(0))
+
+                if "K" in value:
+                    num /= 1000
+
                 if header in metrics:
-                    df.loc[0, header] = float(value[0:-1])
+                    df.loc[0, header] = num
 
         [testCaseName, library, attempt, extension] = os.path.basename(path).split(".")
 
