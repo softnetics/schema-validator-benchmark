@@ -1,6 +1,9 @@
 import pandas as pd
 import os
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class BenchmarkReader:
@@ -21,7 +24,8 @@ class BenchmarkReader:
             "Symbols",
             "I/O Write time",
             "I/O Read time",
-            "Files"
+            "Files",
+            "Parse time"
         ]
         self.benchmarks = self._buildBenchmarks(self.metrics, self.files)
 
@@ -29,8 +33,10 @@ class BenchmarkReader:
         df = pd.DataFrame(columns=metrics)
         for file in files:
             df = pd.concat([df, self._readBenchmark(metrics, file)], ignore_index=True)
-        return self._cleanBenchmarks(df)
-    
+        df = self._cleanBenchmarks(df)
+        logger.info(f"Read {len(df)} benchmarks")
+        return df
+
     def _cleanBenchmarks(self, df: pd.DataFrame):
         # Group by the Name, Library columns and remove Attempt column
         df = df.groupby(["Name", "Library"]).mean().drop(columns=["Attempt"])
@@ -46,8 +52,8 @@ class BenchmarkReader:
                     line.split(":")[0].strip(),
                     line.split(":")[1].strip(),
                 ]
-                
-                num = float(re.search(r"\d+", value).group(0))
+
+                num = float(re.search(r"\d+(\.\d+)?", value).group(0))
 
                 if "K" in value:
                     num /= 1000

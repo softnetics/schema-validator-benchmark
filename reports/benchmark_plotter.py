@@ -2,6 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class BenchmarkPlotter:
     def __init__(self, benchmarks: pd.DataFrame, dir: str):
         cwd = os.getcwd()
@@ -14,7 +19,7 @@ class BenchmarkPlotter:
             "typescript": "#d62728",
             "valibot": "#9467bd",
             "yup": "#8c564b",
-            "zod": "#e377c2",   
+            "zod": "#e377c2",
         }
         self.metrics = [
             {"name": "Memory used", "unit": "Megabytes"},
@@ -26,9 +31,11 @@ class BenchmarkPlotter:
             {"name": "Symbols", "unit": "Count"},
             {"name": "I/O Read time", "unit": "Seconds"},
             {"name": "Files", "unit": "Count"},
+            {"name": "Parse time", "unit": "Seconds"},
         ]
 
     def plot(self):
+        logger.info("Plotting benchmarks")
         for metric in self.metrics:
             self._plotMetric(metricName=metric["name"], unit=metric["unit"])
 
@@ -37,9 +44,9 @@ class BenchmarkPlotter:
         df = df[["Name", "Library", metricName]]
         df = df.sort_values(by=[metricName], ascending=False)
         grouped = df.groupby(by=["Name"])
-        
+
         fig = plt.figure(figsize=(8, 12))
-        fig.suptitle(f'{metricName} comparison', fontsize=24)
+        fig.suptitle(f"{metricName} comparison", fontsize=24)
 
         for i, (names, group) in enumerate(grouped):
             ax = plt.subplot(len(grouped), 1, i + 1)
