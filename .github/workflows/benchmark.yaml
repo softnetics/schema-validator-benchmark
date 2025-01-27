@@ -81,7 +81,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run evaluate
+      - name: Run codegen
         run: pnpm run:codegen
 
       - name: Run evaluate
