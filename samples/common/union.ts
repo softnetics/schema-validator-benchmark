@@ -33,4 +33,4 @@ type Penguin = Bird & {
   swimmingSpeed: number
 }
 
-export type Union_Model = (Mammal & (Dog | Cat)) | (Bird & (Eagle | Penguin))
+export type Union_Model = Dog | Cat | Eagle | Penguin
