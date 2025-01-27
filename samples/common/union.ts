@@ -1,5 +1,4 @@
 type Animal = {
-  type: 'animal'
   name: string
 }
 
