@@ -25,6 +25,7 @@ class BenchmarkPlotter:
             {"name": "Types", "unit": "Count"},
             {"name": "Symbols", "unit": "Count"},
             {"name": "I/O Read time", "unit": "Seconds"},
+            {"name": "Files", "unit": "Count"},
         ]
 
     def plot(self):

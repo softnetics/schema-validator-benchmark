@@ -3,6 +3,7 @@ import { BENCHMARK_DIR_NAME, GENERATED_DIR_NAME } from '@/constants/path'
 import { cleanDir } from '@/utils/clean-dir'
 import { extractFileName } from '@/utils/extract-file-name'
 import { writeFile } from '@/utils/write-file'
+import { Chunk } from '@effect/schema/Schema'
 import { spawn } from 'child_process'
 import * as fs from 'node:fs'
 import * as path from 'node:path'
@@ -10,14 +11,20 @@ import * as path from 'node:path'
 async function spawnProcess(command: string, args: string[], onStdout?: (chunk: Buffer) => void) {
   console.log('Running command:', '\x1b[36m%s\x1b[0m', command, args.join(' '))
 
+  let buffer = Buffer.from('')
+
   return new Promise<void>((resolve, reject) => {
     const proc = spawn(command, args)
-    if (onStdout) proc.stdout.on('data', onStdout)
+    if (onStdout)
+      proc.stdout.on('data', (chunk) => {
+        buffer = Buffer.concat([buffer, chunk])
+      })
     else proc.stdout.pipe(process.stdout)
 
     proc.stderr.pipe(process.stderr)
     proc.on('close', (code) => {
       if (code === 0) {
+        onStdout?.(buffer)
         resolve()
       } else {
         reject(code)
@@ -50,7 +57,7 @@ async function evaluate(attempt: number, options?: { enableTracing?: boolean }) 
         `pnpm`,
         ['tsc', '--noEmit', '--skipLibCheck', '--extendedDiagnostics', ...traceOptions, srcPath],
         (content) => {
-          const contentString = content.toString()
+          const contentString = content.toString('utf-8')
           writeFile(destPath, contentString)
         }
       )

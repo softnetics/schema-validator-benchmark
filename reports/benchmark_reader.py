@@ -21,6 +21,7 @@ class BenchmarkReader:
             "Symbols",
             "I/O Write time",
             "I/O Read time",
+            "Files"
         ]
         self.benchmarks = self._buildBenchmarks(self.metrics, self.files)
 

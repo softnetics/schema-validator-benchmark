@@ -6,6 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'reports/**'
+      - 'samples/**'
       - '.github/workflows/benchmark.yaml'
       - 'package.json'
 
