@@ -6,6 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'reports/**'
+      - '.github/workflows/benchmark.yaml'
 env:
   NODE_VERSION: 20.16.0
   PNPM_VERSION: 9.14.2
