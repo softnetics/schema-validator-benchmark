@@ -20,6 +20,7 @@ class BenchmarkPlotter:
             "valibot": "#9467bd",
             "yup": "#8c564b",
             "zod": "#e377c2",
+            "zod4": "#ffd700",
         }
         self.metrics = [
             {"name": "Memory used", "unit": "Megabytes"},

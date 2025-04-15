@@ -18,6 +18,7 @@ import {
   TypeScriptToModel,
   TypeScriptToTypeBox,
 } from '@/tools/typebox-codegen'
+import { ModelToZod4 } from '@/tools/typebox-codegen/model/model-to-zod4'
 import { cleanDir } from '@/utils/clean-dir'
 import { extractFileName } from '@/utils/extract-file-name'
 import { writeFile } from '@/utils/write-file'
@@ -43,6 +44,10 @@ async function generateSchemaValidationLibrary(
     switch (library) {
       case SchemaValidationLibrary.ZOD: {
         content = await ModelToZod.Generate(model)
+        break
+      }
+      case SchemaValidationLibrary.ZOD4: {
+        content = await ModelToZod4.Generate(model)
         break
       }
       case SchemaValidationLibrary.YUP: {

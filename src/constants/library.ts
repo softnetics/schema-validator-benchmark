@@ -1,5 +1,6 @@
 export const SchemaValidationLibrary = {
   ZOD: 'zod',
+  ZOD4: 'zod4',
   YUP: 'yup',
   VALIBOT: 'valibot',
   EFFECT: 'effect',

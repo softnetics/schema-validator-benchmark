@@ -1,4 +1,4 @@
-import * as z from 'zod'
+import * as z from 'zod4'
 
 export type TransformSimple_ModelInput = z.input<typeof TransformSimple_Model>
 export type TransformSimple_ModelOutput = z.output<typeof TransformSimple_Model>

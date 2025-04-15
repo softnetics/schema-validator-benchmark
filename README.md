@@ -39,14 +39,15 @@ At [Softnetics Team](https://www.softnetics.tech/), we specialize in building so
 
 ## Library Version
 
-| Library                                               | Version       |
-| ----------------------------------------------------- | ------------- |
-| [Zod](https://zod.dev/)                               | 3.24.1        |
-| [typebox](https://github.com/sinclairzx81/typebox)    | 0.34.14       |
-| [arktype](https://arktype.io/)                        | 2.0.3         |
-| [valibot](https://valibot.dev/)                       | 1.0.0-beta.14 |
-| [yup](https://github.com/jquense/yup)                 | 1.6.1         |
-| [@effect/schema](https://github.com/Effect-TS/effect) | 0.75.5        |
+| Library                                               | Version                    |
+| ----------------------------------------------------- | -------------------------- |
+| [Zod](https://zod.dev/)                               | 3.24.1                     |
+| [Zod4](https://zod.dev/)                              | 4.0.0-beta.20250414T061543 |
+| [typebox](https://github.com/sinclairzx81/typebox)    | 0.34.14                    |
+| [arktype](https://arktype.io/)                        | 2.0.3                      |
+| [valibot](https://valibot.dev/)                       | 1.0.0-beta.14              |
+| [yup](https://github.com/jquense/yup)                 | 1.6.1                      |
+| [@effect/schema](https://github.com/Effect-TS/effect) | 0.75.5                     |
 
 # Test Cases Explanation
 

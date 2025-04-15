@@ -41,6 +41,9 @@ importers:
       zod:
         specifier: ^3.24.1
         version: 3.24.1
+      zod4:
+        specifier: npm:zod@4.0.0-beta.20250414T061543
+        version: zod@4.0.0-beta.20250414T061543
     devDependencies:
       '@types/node':
         specifier: ^20.12.12
@@ -188,6 +191,9 @@ packages:
   '@typescript-eslint/visitor-keys@7.10.0':
     resolution: {integrity: sha512-9ntIVgsi6gg6FIq9xjEO4VQJvwOqA3jaBFQJ/6TK5AvEup2+cECI6Fh7QiBxmfMHXU0V0J4RyPeOU1VDNzl9cg==}
     engines: {node: ^18.18.0 || >=20.0.0}
+
+  '@zod/core@0.5.0':
+    resolution: {integrity: sha512-9EW5fOng5558DM68WmVtecPzHuROdB5AcBVOBVqtPIup1quYRxxzwzT9+BPNX5Pr+so0wP/Hxv8+pCrBbjKQeg==}
 
   ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
@@ -423,6 +429,9 @@ packages:
   zod@3.24.1:
     resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
+  zod@4.0.0-beta.20250414T061543:
+    resolution: {integrity: sha512-1X7/cVHAWBt9jEIIg2Q2GFEApZy1VYe+YBxsjwVMmDZfMvn09CylsKLGZtfjZ/cwYrJha0OIWOh+MouaOj3Zdg==}
+
 snapshots:
 
   '@ark/schema@0.38.0':
@@ -588,6 +597,8 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 7.10.0
       eslint-visitor-keys: 3.4.3
+
+  '@zod/core@0.5.0': {}
 
   ansi-styles@3.2.1:
     dependencies:
@@ -772,3 +783,7 @@ snapshots:
       type-fest: 2.19.0
 
   zod@3.24.1: {}
+
+  zod@4.0.0-beta.20250414T061543:
+    dependencies:
+      '@zod/core': 0.5.0
