@@ -1,7 +1,7 @@
 import * as v from 'valibot'
 
-type TransformSimple_ModelInput = v.InferInput<typeof TransformSimple_Model>
-type TransformSimple_ModelOutput = v.InferOutput<typeof TransformSimple_Model>
+export type TransformSimple_ModelInput = v.InferInput<typeof TransformSimple_Model>
+export type TransformSimple_ModelOutput = v.InferOutput<typeof TransformSimple_Model>
 export const TransformSimple_Model = v.pipe(
   v.object({
     a: v.number(),

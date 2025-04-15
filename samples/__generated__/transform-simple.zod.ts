@@ -1,7 +1,7 @@
 import * as z from 'zod'
 
-type TransformSimple_ModelInput = z.input<typeof TransformSimple_Model>
-type TransformSimple_ModelOutput = z.output<typeof TransformSimple_Model>
+export type TransformSimple_ModelInput = z.input<typeof TransformSimple_Model>
+export type TransformSimple_ModelOutput = z.output<typeof TransformSimple_Model>
 export const TransformSimple_Model = z
   .object({
     a: z.number(),

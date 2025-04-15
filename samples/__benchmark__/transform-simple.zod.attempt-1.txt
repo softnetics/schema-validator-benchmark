@@ -6,22 +6,22 @@ Lines of JavaScript:             0
 Lines of JSON:                   0
 Lines of Other:                  0
 Identifiers:                 82327
-Symbols:                     79606
+Symbols:                     79608
 Types:                        8596
 Instantiations:              28848
-Memory used:               104635K
+Memory used:               113783K
 Assignability cache size:     1936
 Identity cache size:           449
 Subtype cache size:              0
 Strict subtype cache size:       0
-I/O Read time:               0.02s
-Parse time:                  0.68s
+I/O Read time:               0.04s
+Parse time:                  0.65s
 ResolveModule time:          0.03s
-ResolveTypeReference time:   0.01s
-ResolveLibrary time:         0.03s
-Program time:                0.82s
+ResolveTypeReference time:   0.02s
+ResolveLibrary time:         0.01s
+Program time:                0.80s
 Bind time:                   0.34s
 Check time:                  0.42s
 printTime time:              0.00s
 Emit time:                   0.00s
-Total time:                  1.58s
+Total time:                  1.57s
