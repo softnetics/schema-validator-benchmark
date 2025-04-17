@@ -1,27 +1,27 @@
-Files:                        219
-Lines of Library:           38411
-Lines of Definitions:       56096
-Lines of TypeScript:          105
-Lines of JavaScript:            0
-Lines of JSON:                  0
-Lines of Other:                 0
-Identifiers:                83524
-Symbols:                    69650
-Types:                       3645
-Instantiations:             15378
-Memory used:               98695K
-Assignability cache size:     692
-Identity cache size:           15
-Subtype cache size:            14
-Strict subtype cache size:     45
-I/O Read time:              0.02s
-Parse time:                 0.68s
-ResolveModule time:         0.06s
-ResolveTypeReference time:  0.00s
-ResolveLibrary time:        0.03s
-Program time:               0.87s
-Bind time:                  0.34s
-Check time:                 0.29s
-printTime time:             0.00s
-Emit time:                  0.00s
-Total time:                 1.51s
+Files:                         219
+Lines of Library:            38411
+Lines of Definitions:        56096
+Lines of TypeScript:           105
+Lines of JavaScript:             0
+Lines of JSON:                   0
+Lines of Other:                  0
+Identifiers:                 83524
+Symbols:                     69650
+Types:                        3645
+Instantiations:              15378
+Memory used:               105043K
+Assignability cache size:      692
+Identity cache size:            15
+Subtype cache size:             14
+Strict subtype cache size:      45
+I/O Read time:               0.03s
+Parse time:                  0.62s
+ResolveModule time:          0.04s
+ResolveTypeReference time:   0.01s
+ResolveLibrary time:         0.02s
+Program time:                0.78s
+Bind time:                   0.33s
+Check time:                  0.25s
+printTime time:              0.00s
+Emit time:                   0.00s
+Total time:                  1.36s
