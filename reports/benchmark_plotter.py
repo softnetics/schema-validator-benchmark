@@ -46,7 +46,7 @@ class BenchmarkPlotter:
         df = df.sort_values(by=[metricName], ascending=False)
         grouped = df.groupby(by=["Name"])
 
-        fig = plt.figure(figsize=(8, 12))
+        fig = plt.figure(figsize=(8, 15))
         fig.suptitle(f"{metricName} comparison", fontsize=24)
 
         for i, (names, group) in enumerate(grouped):
