@@ -2,8 +2,14 @@
 
 At [Softnetics Team](https://www.softnetics.tech/), we specialize in building software using TypeScript. Data validation is a crucial part of our work, as we need to verify and convert user input into the correct format. Initially, we chose [Zod](https://zod.dev/) as our schema validation library. However, as our applications grew larger, we noticed high CPU and memory usage during TypeScript compilation, particularly in development. Our research revealed that these performance issues stemmed from the validation library itself. This led us to conduct a benchmark study comparing CPU and memory usage across different schema validation libraries.
 
+# NOTE
+
+> [!WARNING]  
+> The summary will be updated in the future (due to the upcoming release of Zod 4).
+
 # Table of Contents <!-- omit in toc -->
 
+- [NOTE](#note)
 - [Environment](#environment)
   - [System Information](#system-information)
   - [Library Version](#library-version)

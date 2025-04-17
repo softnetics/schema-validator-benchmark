@@ -46,17 +46,25 @@ class BenchmarkPlotter:
         df = df.sort_values(by=[metricName], ascending=False)
         grouped = df.groupby(by=["Name"])
 
-        fig = plt.figure(figsize=(8, 15))
+        ncols = 2
+        nrows = len(grouped) // ncols + len(grouped) % ncols
+        fig, axes = plt.subplots(ncols=ncols, nrows=nrows, figsize=(ncols * 8, nrows * 2.4))
         fig.suptitle(f"{metricName} comparison", fontsize=24)
 
+        # Clear axes
         for i, (names, group) in enumerate(grouped):
-            ax = plt.subplot(len(grouped), 1, i + 1)
+            ax = axes[i // ncols, i % ncols]
             colors = [self.colorMap[lib] for lib in group["Library"]]
             ax.barh(y=group["Library"], width=group[metricName], color=colors)
             ax.set_title(names[0])
             ax.set_xlabel(unit)
-            ax.plot()
+
+        remaining = len(grouped) % ncols
+        for i in range(remaining):
+            # Remove empty axes
+            ax = axes[nrows-1, ncols-i-1]
+            fig.delaxes(ax)
 
         fileName = metricName.replace(" ", "_").replace("/", "_").lower()
-        plt.subplots_adjust(wspace=0, hspace=0.8)
+        plt.subplots_adjust(wspace=0.2, hspace=1)
         plt.savefig(os.path.join(self.dir, f"{fileName}.png"))
