@@ -86,7 +86,7 @@ export namespace ModelToZod4 {
       if (rest.length === 0) return `z.never()`
       if (rest.length === 1) return Visit(rest[0])
       const [left, right] = [rest[0], rest.slice(1)]
-      return Type(schema, `${Visit(left)}.merge(${reduce(right)})`)
+      return Type(schema, `${Visit(left)}.extend(${reduce(right)})`)
     }
     return reduce(schema.allOf)
   }

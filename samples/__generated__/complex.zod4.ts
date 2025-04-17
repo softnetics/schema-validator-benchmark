@@ -9,7 +9,7 @@ export const Complex_Base = z.object({
 })
 
 export type Complex_Extended = z.infer<typeof Complex_Extended>
-export const Complex_Extended = Complex_Base.merge(
+export const Complex_Extended = Complex_Base.extend(
   z.object({
     email: z.string(),
     active: z.boolean()
@@ -18,19 +18,19 @@ export const Complex_Extended = Complex_Base.merge(
 
 export type Complex_UserType = z.infer<typeof Complex_UserType>
 export const Complex_UserType = z.union([
-  Complex_Base.merge(
+  Complex_Base.extend(
     z.object({
       role: z.literal('admin'),
       permissions: z.array(z.string())
     })
   ),
-  Complex_Base.merge(
+  Complex_Base.extend(
     z.object({
       role: z.literal('user'),
       group: z.string()
     })
   ),
-  Complex_Base.merge(
+  Complex_Base.extend(
     z.object({
       role: z.literal('guest'),
       restrictions: z.array(z.string())
@@ -47,7 +47,7 @@ export const Complex_WithoutAgeAndEmail = z
     name: z.string(),
     role: z.union([z.literal('admin'), z.literal('user'), z.literal('guest')])
   })
-  .merge(
+  .extend(
     z.object({
       active: z.boolean()
     })
@@ -57,13 +57,13 @@ export type Complex_ExtractAdminAndUser = z.infer<
   typeof Complex_ExtractAdminAndUser
 >
 export const Complex_ExtractAdminAndUser = z.union([
-  Complex_Base.merge(
+  Complex_Base.extend(
     z.object({
       role: z.literal('admin'),
       permissions: z.array(z.string())
     })
   ),
-  Complex_Base.merge(
+  Complex_Base.extend(
     z.object({
       role: z.literal('user'),
       group: z.string()
@@ -73,13 +73,13 @@ export const Complex_ExtractAdminAndUser = z.union([
 
 export type Complex_ExcludeGuest = z.infer<typeof Complex_ExcludeGuest>
 export const Complex_ExcludeGuest = z.union([
-  Complex_Base.merge(
+  Complex_Base.extend(
     z.object({
       role: z.literal('admin'),
       permissions: z.array(z.string())
     })
   ),
-  Complex_Base.merge(
+  Complex_Base.extend(
     z.object({
       role: z.literal('user'),
       group: z.string()
@@ -88,7 +88,7 @@ export const Complex_ExcludeGuest = z.union([
 ])
 
 export type Complex_Model = z.infer<typeof Complex_Model>
-export const Complex_Model = Complex_WithoutAgeAndEmail.merge(
+export const Complex_Model = Complex_WithoutAgeAndEmail.extend(
   z.object({
     extraInfo: Complex_ExtractAdminAndUser,
     filteredRoles: Complex_ExcludeGuest
