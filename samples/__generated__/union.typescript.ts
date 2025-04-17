@@ -1,109 +1,23 @@
-export type Animal = {
+export type Dog = {
   name: string
-}
-export const Animal = (() => {
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
-    )
-  }
-  return function check(value: any): value is Animal {
-    return check_Animal(value)
-  }
-})()
-
-export type Mammal = Animal & {
   type: 'mammal'
   hasFur: boolean
-}
-export const Mammal = (() => {
-  function check_Mammal(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'mammal' &&
-      typeof value.hasFur === 'boolean'
-    )
-  }
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
-    )
-  }
-  return function check(value: any): value is Mammal {
-    return check_Mammal(value)
-  }
-})()
-
-export type Bird = Animal & {
-  type: 'bird'
-  canFly: boolean
-}
-export const Bird = (() => {
-  function check_Bird(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'bird' &&
-      typeof value.canFly === 'boolean'
-    )
-  }
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
-    )
-  }
-  return function check(value: any): value is Bird {
-    return check_Bird(value)
-  }
-})()
-
-export type Dog = Mammal & {
   breed: 'dog'
   barkingLevel: 'low' | 'medium' | 'high'
 }
 export const Dog = (() => {
   function check_Dog(value: any): boolean {
     return (
-      check_Mammal(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'mammal' &&
+      typeof value.hasFur === 'boolean' &&
       value.breed === 'dog' &&
       (value.barkingLevel === 'low' ||
         value.barkingLevel === 'medium' ||
         value.barkingLevel === 'high')
-    )
-  }
-  function check_Mammal(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'mammal' &&
-      typeof value.hasFur === 'boolean'
-    )
-  }
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
     )
   }
   return function check(value: any): value is Dog {
@@ -111,37 +25,24 @@ export const Dog = (() => {
   }
 })()
 
-export type Cat = Mammal & {
+export type Cat = {
+  name: string
+  type: 'mammal'
+  hasFur: boolean
   breed: 'cat'
   clawSharpness: 'dull' | 'sharp'
 }
 export const Cat = (() => {
   function check_Cat(value: any): boolean {
     return (
-      check_Mammal(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'mammal' &&
+      typeof value.hasFur === 'boolean' &&
       value.breed === 'cat' &&
       (value.clawSharpness === 'dull' || value.clawSharpness === 'sharp')
-    )
-  }
-  function check_Mammal(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'mammal' &&
-      typeof value.hasFur === 'boolean'
-    )
-  }
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
     )
   }
   return function check(value: any): value is Cat {
@@ -149,37 +50,24 @@ export const Cat = (() => {
   }
 })()
 
-export type Eagle = Bird & {
+export type Eagle = {
+  name: string
+  type: 'bird'
+  canFly: boolean
   species: 'eagle'
   wingSpan: number
 }
 export const Eagle = (() => {
   function check_Eagle(value: any): boolean {
     return (
-      check_Bird(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'bird' &&
+      typeof value.canFly === 'boolean' &&
       value.species === 'eagle' &&
       Number.isFinite(value.wingSpan)
-    )
-  }
-  function check_Bird(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'bird' &&
-      typeof value.canFly === 'boolean'
-    )
-  }
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
     )
   }
   return function check(value: any): value is Eagle {
@@ -187,37 +75,24 @@ export const Eagle = (() => {
   }
 })()
 
-export type Penguin = Bird & {
+export type Penguin = {
+  name: string
+  type: 'bird'
+  canFly: boolean
   species: 'penguin'
   swimmingSpeed: number
 }
 export const Penguin = (() => {
   function check_Penguin(value: any): boolean {
     return (
-      check_Bird(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'bird' &&
+      typeof value.canFly === 'boolean' &&
       value.species === 'penguin' &&
       Number.isFinite(value.swimmingSpeed)
-    )
-  }
-  function check_Bird(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'bird' &&
-      typeof value.canFly === 'boolean'
-    )
-  }
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
     )
   }
   return function check(value: any): value is Penguin {
@@ -237,70 +112,50 @@ export const Union_Model = (() => {
   }
   function check_Dog(value: any): boolean {
     return (
-      check_Mammal(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'mammal' &&
+      typeof value.hasFur === 'boolean' &&
       value.breed === 'dog' &&
       (value.barkingLevel === 'low' ||
         value.barkingLevel === 'medium' ||
         value.barkingLevel === 'high')
     )
   }
-  function check_Mammal(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'mammal' &&
-      typeof value.hasFur === 'boolean'
-    )
-  }
-  function check_Animal(value: any): boolean {
-    return (
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      typeof value.name === 'string'
-    )
-  }
   function check_Cat(value: any): boolean {
     return (
-      check_Mammal(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'mammal' &&
+      typeof value.hasFur === 'boolean' &&
       value.breed === 'cat' &&
       (value.clawSharpness === 'dull' || value.clawSharpness === 'sharp')
     )
   }
   function check_Eagle(value: any): boolean {
     return (
-      check_Bird(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'bird' &&
+      typeof value.canFly === 'boolean' &&
       value.species === 'eagle' &&
       Number.isFinite(value.wingSpan)
     )
   }
-  function check_Bird(value: any): boolean {
-    return (
-      check_Animal(value) &&
-      typeof value === 'object' &&
-      value !== null &&
-      !Array.isArray(value) &&
-      value.type === 'bird' &&
-      typeof value.canFly === 'boolean'
-    )
-  }
   function check_Penguin(value: any): boolean {
     return (
-      check_Bird(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
+      typeof value.name === 'string' &&
+      value.type === 'bird' &&
+      typeof value.canFly === 'boolean' &&
       value.species === 'penguin' &&
       Number.isFinite(value.swimmingSpeed)
     )

@@ -1,33 +1,31 @@
-type Animal = {
+type Dog = {
   name: string
-}
-
-type Mammal = Animal & {
   type: 'mammal'
   hasFur: boolean
-}
-
-type Bird = Animal & {
-  type: 'bird'
-  canFly: boolean
-}
-
-type Dog = Mammal & {
   breed: 'dog'
   barkingLevel: 'low' | 'medium' | 'high'
 }
 
-type Cat = Mammal & {
+type Cat = {
+  name: string
+  type: 'mammal'
+  hasFur: boolean
   breed: 'cat'
   clawSharpness: 'dull' | 'sharp'
 }
 
-type Eagle = Bird & {
+type Eagle = {
+  name: string
+  type: 'bird'
+  canFly: boolean
   species: 'eagle'
   wingSpan: number
 }
 
-type Penguin = Bird & {
+type Penguin = {
+  name: string
+  type: 'bird'
+  canFly: boolean
   species: 'penguin'
   swimmingSpeed: number
 }

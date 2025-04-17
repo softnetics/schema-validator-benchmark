@@ -1,10 +1,10 @@
-export type Extend_BaseSubModel = {
+export type Intersect_BaseSubModel = {
   description: string
   createdAt: string
   updatedAt: string
 }
-export const Extend_BaseSubModel = (() => {
-  function check_Extend_95_BaseSubModel(value: any): boolean {
+export const Intersect_BaseSubModel = (() => {
+  function check_Intersect_95_BaseSubModel(value: any): boolean {
     return (
       typeof value === 'object' &&
       value !== null &&
@@ -14,19 +14,19 @@ export const Extend_BaseSubModel = (() => {
       typeof value.updatedAt === 'string'
     )
   }
-  return function check(value: any): value is Extend_BaseSubModel {
-    return check_Extend_95_BaseSubModel(value)
+  return function check(value: any): value is Intersect_BaseSubModel {
+    return check_Intersect_95_BaseSubModel(value)
   }
 })()
 
-export type Extend_Model = Extend_BaseSubModel & {
+export type Intersect_Model = Intersect_BaseSubModel & {
   id: string
   items: Array<string>
 }
-export const Extend_Model = (() => {
-  function check_Extend_95_Model(value: any): boolean {
+export const Intersect_Model = (() => {
+  function check_Intersect_95_Model(value: any): boolean {
     return (
-      check_Extend_95_BaseSubModel(value) &&
+      check_Intersect_95_BaseSubModel(value) &&
       typeof value === 'object' &&
       value !== null &&
       !Array.isArray(value) &&
@@ -35,7 +35,7 @@ export const Extend_Model = (() => {
       value.items.every((value: any) => typeof value === 'string')
     )
   }
-  function check_Extend_95_BaseSubModel(value: any): boolean {
+  function check_Intersect_95_BaseSubModel(value: any): boolean {
     return (
       typeof value === 'object' &&
       value !== null &&
@@ -45,7 +45,7 @@ export const Extend_Model = (() => {
       typeof value.updatedAt === 'string'
     )
   }
-  return function check(value: any): value is Extend_Model {
-    return check_Extend_95_Model(value)
+  return function check(value: any): value is Intersect_Model {
+    return check_Intersect_95_Model(value)
   }
 })()

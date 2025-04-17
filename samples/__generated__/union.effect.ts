@@ -1,25 +1,6 @@
 import { Schema as ET } from '@effect/schema/Schema'
 import { Schema as ES } from '@effect/schema'
 
-export type Animal = ET.Type<typeof Animal>
-export const Animal = ES.Struct({
-  name: ES.String
-})
-
-export type Mammal = ET.Type<typeof Mammal>
-export const Mammal = ES.Struct({
-  name: ES.String,
-  type: ES.Literal('mammal'),
-  hasFur: ES.Boolean
-})
-
-export type Bird = ET.Type<typeof Bird>
-export const Bird = ES.Struct({
-  name: ES.String,
-  type: ES.Literal('bird'),
-  canFly: ES.Boolean
-})
-
 export type Dog = ET.Type<typeof Dog>
 export const Dog = ES.Struct({
   name: ES.String,

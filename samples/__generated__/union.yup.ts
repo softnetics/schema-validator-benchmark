@@ -1,35 +1,42 @@
 import * as y from 'yup'
 
-export type Animal = y.InferType<typeof Animal>
-export const Animal = y.object({
-  name: y.string().required()
-})
-
-export type Mammal = y.InferType<typeof Mammal>
-export const Mammal = y.object({
+export type Dog = y.InferType<typeof Dog>
+export const Dog = y.object({
   name: y.string().required(),
   type: y.mixed((value): value is 'mammal' => value === 'mammal').required(),
-  hasFur: y.boolean().required()
+  hasFur: y.boolean().required(),
+  breed: y.mixed((value): value is 'dog' => value === 'dog').required(),
+  barkingLevel: y.mixed().oneOf(['low', 'medium', 'high']).required()
 })
-
-export type Bird = y.InferType<typeof Bird>
-export const Bird = y.object({
-  name: y.string().required(),
-  type: y.mixed((value): value is 'bird' => value === 'bird').required(),
-  canFly: y.boolean().required()
-})
-
-export type Dog = y.InferType<typeof Dog>
-export const Dog = y.mixed(/* unsupported */)
 
 export type Cat = y.InferType<typeof Cat>
-export const Cat = y.mixed(/* unsupported */)
+export const Cat = y.object({
+  name: y.string().required(),
+  type: y.mixed((value): value is 'mammal' => value === 'mammal').required(),
+  hasFur: y.boolean().required(),
+  breed: y.mixed((value): value is 'cat' => value === 'cat').required(),
+  clawSharpness: y.mixed().oneOf(['dull', 'sharp']).required()
+})
 
 export type Eagle = y.InferType<typeof Eagle>
-export const Eagle = y.mixed(/* unsupported */)
+export const Eagle = y.object({
+  name: y.string().required(),
+  type: y.mixed((value): value is 'bird' => value === 'bird').required(),
+  canFly: y.boolean().required(),
+  species: y.mixed((value): value is 'eagle' => value === 'eagle').required(),
+  wingSpan: y.number().required()
+})
 
 export type Penguin = y.InferType<typeof Penguin>
-export const Penguin = y.mixed(/* unsupported */)
+export const Penguin = y.object({
+  name: y.string().required(),
+  type: y.mixed((value): value is 'bird' => value === 'bird').required(),
+  canFly: y.boolean().required(),
+  species: y
+    .mixed((value): value is 'penguin' => value === 'penguin')
+    .required(),
+  swimmingSpeed: y.number().required()
+})
 
 export type Union_Model = y.InferType<typeof Union_Model>
 export const Union_Model = y
