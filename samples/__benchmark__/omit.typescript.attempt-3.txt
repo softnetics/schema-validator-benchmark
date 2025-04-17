@@ -9,12 +9,12 @@ Identifiers:                77438
 Symbols:                    55018
 Types:                        128
 Instantiations:                 0
-Memory used:               87807K
+Memory used:               87772K
 Assignability cache size:       0
 Identity cache size:            0
 Subtype cache size:             0
 Strict subtype cache size:      0
-I/O Read time:              0.02s
+I/O Read time:              0.01s
 Parse time:                 0.41s
 ResolveTypeReference time:  0.01s
 ResolveModule time:         0.01s

@@ -9,7 +9,7 @@ Identifiers:                88535
 Symbols:                    60883
 Types:                        749
 Instantiations:              1236
-Memory used:               97279K
+Memory used:               97215K
 Assignability cache size:      74
 Identity cache size:            0
 Subtype cache size:             1

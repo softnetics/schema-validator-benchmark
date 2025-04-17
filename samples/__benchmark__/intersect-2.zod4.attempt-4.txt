@@ -9,13 +9,13 @@ Identifiers:                88535
 Symbols:                    60883
 Types:                        749
 Instantiations:              1236
-Memory used:               97219K
+Memory used:               97315K
 Assignability cache size:      74
 Identity cache size:            0
 Subtype cache size:             1
 Strict subtype cache size:      0
 I/O Read time:              0.02s
-Parse time:                 0.44s
+Parse time:                 0.45s
 ResolveModule time:         0.03s
 ResolveTypeReference time:  0.01s
 ResolveLibrary time:        0.01s
