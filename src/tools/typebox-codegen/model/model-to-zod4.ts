@@ -86,7 +86,10 @@ export namespace ModelToZod4 {
       if (rest.length === 0) return `z.never()`
       if (rest.length === 1) return Visit(rest[0])
       const [left, right] = [rest[0], rest.slice(1)]
-      return Type(schema, `${Visit(left)}.extend(${reduce(right)})`)
+
+      const value = reduce(right)
+      const removedObject = value.replace(/^z\.object\(\{\s*/, '{').replace(/\}\)$/, '}')
+      return Type(schema, `${Visit(left)}.extend(${removedObject})`)
     }
     return reduce(schema.allOf)
   }

@@ -8,9 +8,7 @@ export const Intersect_BaseSubModel = z.object({
 })
 
 export type Intersect_Model = z.infer<typeof Intersect_Model>
-export const Intersect_Model = Intersect_BaseSubModel.extend(
-  z.object({
-    id: z.string(),
-    items: z.array(z.string())
-  })
-)
+export const Intersect_Model = Intersect_BaseSubModel.extend({
+  id: z.string(),
+  items: z.array(z.string())
+})
