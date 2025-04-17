@@ -9,19 +9,19 @@ Identifiers:                 82376
 Symbols:                     81325
 Types:                       10355
 Instantiations:              51790
-Memory used:               117527K
+Memory used:               117305K
 Assignability cache size:     2572
 Identity cache size:           461
 Subtype cache size:              1
 Strict subtype cache size:       0
 I/O Read time:               0.03s
-Parse time:                  0.66s
+Parse time:                  0.67s
 ResolveModule time:          0.04s
 ResolveTypeReference time:   0.01s
-ResolveLibrary time:         0.03s
+ResolveLibrary time:         0.01s
 Program time:                0.82s
-Bind time:                   0.33s
-Check time:                  0.54s
+Bind time:                   0.35s
+Check time:                  0.57s
 printTime time:              0.00s
 Emit time:                   0.00s
-Total time:                  1.68s
+Total time:                  1.74s
