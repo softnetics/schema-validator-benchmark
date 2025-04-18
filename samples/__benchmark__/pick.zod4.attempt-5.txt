@@ -9,7 +9,7 @@ Identifiers:                 88580
 Symbols:                     62138
 Types:                        1191
 Instantiations:               2017
-Memory used:               100040K
+Memory used:               100259K
 Assignability cache size:      156
 Identity cache size:             0
 Subtype cache size:              3
@@ -21,7 +21,7 @@ ResolveTypeReference time:   0.01s
 ResolveLibrary time:         0.01s
 Program time:                0.56s
 Bind time:                   0.22s
-Check time:                  0.08s
+Check time:                  0.09s
 printTime time:              0.00s
 Emit time:                   0.00s
-Total time:                  0.86s
+Total time:                  0.87s

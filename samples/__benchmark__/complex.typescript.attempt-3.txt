@@ -15,13 +15,13 @@ Identity cache size:            0
 Subtype cache size:             0
 Strict subtype cache size:      0
 I/O Read time:              0.02s
-Parse time:                 0.50s
+Parse time:                 0.41s
 ResolveTypeReference time:  0.01s
 ResolveModule time:         0.02s
 ResolveLibrary time:        0.01s
-Program time:               0.60s
-Bind time:                  0.20s
+Program time:               0.50s
+Bind time:                  0.21s
 Check time:                 0.05s
 printTime time:             0.00s
 Emit time:                  0.00s
-Total time:                 0.85s
+Total time:                 0.76s

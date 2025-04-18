@@ -9,7 +9,7 @@ Identifiers:                120542
 Symbols:                     77338
 Types:                        1057
 Instantiations:               2518
-Memory used:               113993K
+Memory used:               113982K
 Assignability cache size:      395
 Identity cache size:             0
 Subtype cache size:              0
@@ -19,7 +19,7 @@ Parse time:                  0.48s
 ResolveModule time:          0.03s
 ResolveTypeReference time:   0.00s
 ResolveLibrary time:         0.01s
-Program time:                0.59s
+Program time:                0.58s
 Bind time:                   0.24s
 Check time:                  0.08s
 printTime time:              0.00s
